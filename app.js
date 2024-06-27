@@ -1,9 +1,11 @@
 const http = require("http");
+const fs = require("fs");
 
 const server = http.createServer((req,res) => {
     console.log(req.url , req.method , req.headers);
     // process.exist();  // this line will stop the server (i.e stop the event loop process)
     const url = req.url;
+    const method = req.method;
     // send response
 
     if(url === '/'){
@@ -13,6 +15,15 @@ const server = http.createServer((req,res) => {
         res.write('</html>');
         return res.end();
     }
+
+    if(url==='/message' && method === 'POST'){
+        fs.writeFileSync('message.txt','Dummy message');
+        res.statusCode = 302;
+        res.setHeader('location','/');
+        return res.end();
+    }
+
+
     res.setHeader('Content-Type' , 'text/html');
     res.write('<html>');
     res.write('<head><title>Node server</title></head>');
