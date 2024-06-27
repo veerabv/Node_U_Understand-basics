@@ -1,0 +1,13 @@
+{
+  "name": "1-understanding-the-basics",
+  "version": "1.0.0",
+  "description": "completed guide",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start-server" : "node app.js"
+  },
+  "author": "veers",
+  "license": "ISC"
+}
