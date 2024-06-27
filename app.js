@@ -17,9 +17,9 @@ const server = http.createServer((req,res) => {
     }
 
     if(url==='/message' && method === 'POST'){
-        fs.writeFileSync('message.txt','Dummy message');
-        res.statusCode = 302;
-        res.setHeader('location','/');
+        fs.writeFileSync('message.txt','Dummy message'); // this will create the new file in the same directory witj message
+        res.statusCode = 302; // set response code  302 is redirection
+        res.setHeader('location','/'); // this will change the location to localhost:8080/
         return res.end();
     }
 
