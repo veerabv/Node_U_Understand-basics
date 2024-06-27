@@ -17,7 +17,27 @@ const server = http.createServer((req,res) => {
     }
 
     if(url==='/message' && method === 'POST'){
-        fs.writeFileSync('message.txt','Dummy message'); // this will create the new file in the same directory witj message
+        const body = [];
+        let message ;
+        req.on('data' , (chunk) => {    // it is like event listener . this will run when a new chunk is received
+            console.log(chunk)
+            body.push(chunk);
+        })
+        req.on('end' , () => {  // this will run once the incoming request is  parsed fully
+               const parsedBody = Buffer.concat(body).toString();
+               console.log(parsedBody);
+                message = parsedBody.split('=')[1];
+                fs.writeFileSync('message.txt',message); // this will create the new file in the same directory witj message
+
+        });
+
+
+
+
+
+
+
+       
         res.statusCode = 302; // set response code  302 is redirection
         res.setHeader('location','/'); // this will change the location to localhost:8080/
         return res.end();
